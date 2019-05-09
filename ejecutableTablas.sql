@@ -89,7 +89,7 @@ CONSTRAINT PkTipoLector PRIMARY KEY(idTipo)
 
 CREATE TABLE lector(
 idLector CHAR(4),
-vigente CHAR(1) NOT NULL,
+vigente CHAR(1) DEFAULT 'Y',
 fechaAlta DATE DEFAULT SYSDATE,
 telefono CHAR(10) NOT NULL,
 nombreLect VARCHAR(20) NOT NULL,
