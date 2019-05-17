@@ -35,7 +35,7 @@ vIdAutor autor.IdAutor%TYPE,
 vIdTesis Tesis.IdTesis%TYPE,
 vCarrera Tesis.Carrera%TYPE,
 vAnio Tesis.AnioPublicacion%TYPE,
-vIdDir Tesis.IdDir%TYPE)
+vIdDir Tesis.IdDir%TYPE:=NULL)
 AS BEGIN
 INSERT INTO material
 VALUES (UPPER(vIdMaterial),UPPER(vUbicacion),
@@ -114,6 +114,9 @@ UPPER(vCalle),UPPER(vColonia),UPPER(vDel),UPPER(vIdTipo));
 END spInsertLector;
 /
 ----------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------
+
 CONNECT system/oracle
 SELECT object_name
 FROM dba_objects 
