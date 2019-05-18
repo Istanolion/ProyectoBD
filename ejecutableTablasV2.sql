@@ -129,6 +129,7 @@ CREATE TABLE prestamo(
 	idEjem CHAR(4) NOT NULL,
 	fechaVen DATE NOT NULL,
 	numRese NUMBER(1) DEFAULT 0,
+	hMulta CHAR(1) DEFAULT 'N',
 	CONSTRAINT PkPrestamo PRIMARY KEY (idPrestamo),
 	CONSTRAINT FkPrestamoEjem FOREIGN KEY (idMaterial,idEjem)
 	REFERENCES ejemplar ON DELETE CASCADE,

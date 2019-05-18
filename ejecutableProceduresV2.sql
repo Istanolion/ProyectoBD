@@ -243,6 +243,27 @@ CREATE OR REPLACE PROCEDURE spResello(
 END spResello;
 /
 ----------------------------------------------------------------------------------
+CREATE OR REPLACE PROCEDURE spPagMulta(
+	vIdLector lector.idLector%TYPE,
+	vIdPrestamo prestamo.idPrestamo%TYPE,
+	vMonto multa.monto%TYPE
+	)
+	AS
+	BEGIN
+	--SE LIQUIDA LA MULTA ENTONCES EN FUNCION DEL ADEUDO SE PERMITIRA 
+	--O NO EL BORRADO
+		UPDATE lector
+		SET adeudo = adeudo - vMonto
+		WHERE idLector = vIdLector;
+	--SE ELIMINA EL REGISTRO DE MULTA
+		DELETE FROM multa
+		WHERE idPrestamo = vIdPrestamo;
+		DBMS_OUTPUT.PUT_LINE('SE HA LIQUIDADO LA MULTA ASOCIADA AL PRESTAMO '||vIdPrestamo);
+		DELETE FROM prestamo
+		WHERE idPrestamo = vIdPrestamo;
+END spPagMulta;
+/
+----------------------------------------------------------------------------------
 CONNECT system/oracle
 SELECT object_name
 FROM dba_objects 
