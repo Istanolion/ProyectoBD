@@ -148,8 +148,8 @@ CREATE OR REPLACE PROCEDURE spPrestamo(
 		--INSERCION DE DATOS
 		INSERT INTO prestamo
 		(idPrestamo,fechaDevl,idMaterial,idLector,idEjem,fechaVen)
-		VALUES(vIdPrestamo,SYSDATE+vDiasTipoLector,vIdMaterial,vIdLector,
-			vIdEjem,SYSDATE+vDiasTipoLector);
+		VALUES(vIdPrestamo,SYSDATE+vIdLector,vIdMaterial,vIdLector,
+			vIdEjem,SYSDATE+vIdLector);
 		--ACTUALIZACION DE STATUS DEL MATERIAL
 		UPDATE ejemplar
 		SET status = 'PRESTAMO'
@@ -176,7 +176,7 @@ CREATE OR REPLACE PROCEDURE spDevol(
 		--EL TRIGGER tgPrestamo SECCION DELETING SE ENCARGARA DE VERIFICAR:
 		--QUE NO HAYA MULTA PARA EL idLector Y DE SER
 		--NECESARIO LA CREARA	
-			BEGIN
+			begin
 				OPEN curDev;
 				FETCH curDev INTO vIdPrestamo;
 				CLOSE curDev;
@@ -262,6 +262,20 @@ CREATE OR REPLACE PROCEDURE spPagMulta(
 		DELETE FROM prestamo
 		WHERE idPrestamo = vIdPrestamo;
 END spPagMulta;
+/
+----------------------------------------------------------------------------------
+CREATE OR REPLACE PROCEDURE spMulta(
+	vIdPrestamo prestamo.idPrestamo%TYPE,
+	vMonto NUMBER,
+	vDiasRet NUMBER)
+	AS
+	BEGIN
+
+	INSERT INTO multa
+	(idPrestamo,monto,diasRetraso)	
+	VALUES(vIdPrestamo,vMonto,vDiasRet);
+
+END spMulta;
 /
 ----------------------------------------------------------------------------------
 CONNECT system/oracle

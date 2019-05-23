@@ -53,7 +53,6 @@ vIdMaterial material.idMaterial%TYPE,
 vUbicacion material.ubicacion%TYPE,
 vClasificacion material.clasificacion%TYPE,
 vTitulo material.titulo%TYPE,
-vtipoMaterial material.tipoMaterial%TYPE,
 vIdAutor autor.IdAutor%TYPE,
 vISBN libro.isbn%TYPE,
 vEdicion libro.edicion%TYPE,
@@ -122,3 +121,23 @@ SELECT object_name
 FROM dba_objects 
 WHERE object_type = 'PROCEDURE' AND OWNER='ADBIBLIO';
 CONNECT adbiblio/proyecto
+
+CONNECT system/oracle
+SELECT object_name
+FROM dba_objects 
+WHERE object_type = 'TRIGGER' AND OWNER='ADBIBLIO';
+CONNECT adbiblio/proyecto
+
+CONNECT system/oracle
+SELECT object_name
+FROM dba_objects 
+WHERE object_type = 'FUNCTION' AND OWNER='ADBIBLIO';
+CONNECT adbiblio/proyecto
+
+CONNECT system/oracle
+SELECT object_name
+FROM dba_objects 
+WHERE object_type = 'VIEW' AND OWNER='ADBIBLIO';
+CONNECT adbiblio/proyecto
+
+ALTER TABLE tipoLector MODIFY diasPrest NUMBER(2);
